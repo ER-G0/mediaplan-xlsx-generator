@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Медиаплан</title>
+  <!-- Загрузка библиотек -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ru.min.js"></script>
+  <script src="https://unpkg.com/exceljs/dist/exceljs.min.js"></script>
+  <!-- Загрузка CSS-стилей -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <form id="mediaPlanForm">
+    <label for="monthPicker">На какой месяц:</label>
+    <input type="text" id="monthPicker" name="monthPicker">
+
+    <label for="customerInput">Заказчик:</label>
+    <input type="text" id="customerInput" name="customerInput">
+
+    <label for="videoTitle">Название видеоматериала:</label>
+    <input type="text" id="videoTitle" name="videoTitle">
+
+    <label for="adDaysPicker">Дни под рекламу:</label>
+    <input type="text" id="adDaysPicker" name="adDaysPicker">
+
+    <label for="adTimesSelect">Время выходов рекламы:</label>
+    <select id="adTimesSelect" name="adTimesSelect" multiple>
+      <option value="08:10">08:10</option>
+      <option value="08:40">08:40</option>
+      <option value="09:10">09:10</option>
+      <option value="14:30">14:30</option>
+      <option value="17:10">17:10</option>
+      <option value="21:05">21:05</option>
+    </select>
+
+    <label for="durationInput">Хронометраж (в секундах):</label>
+    <input type="number" id="durationInput" name="durationInput">
+
+    <button type="button" id="generateTableBtn">Сгенерировать таблицу</button>
+  </form>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
