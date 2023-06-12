@@ -37,6 +37,17 @@ window.addEventListener('DOMContentLoaded', function() {
         // Изменение книги по мере необходимости
         const worksheet = workbook.getWorksheet(1);
 
+        // Клонирование формул из шаблона
+        worksheet.eachRow(function(row) {
+          row.eachCell({ includeEmpty: true }, function(cell) {
+            if (cell.formula) {
+              const newCell = worksheet.getCell(cell.address);
+              newCell.formula = cell.formula;
+            }
+          });
+        });
+
+
         // Выбор нужных ячеек
         worksheet.getCell('F4').value = customer;
         worksheet.getCell('F5').value = video;
