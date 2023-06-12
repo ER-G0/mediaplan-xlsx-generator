@@ -1,18 +1,18 @@
 window.addEventListener('DOMContentLoaded', function() {
-  // Initialize Flatpickr for the month picker field
+  // Инициализация Flatpickr для поля с выбором месяца
   flatpickr('#monthPicker', {
     dateFormat: 'F Y',
     locale: 'ru',
   });
 
-  // Initialize Flatpickr for the ad days picker field
+  // Инициализация Flatpickr для поля с выбором дней
   flatpickr('#adDaysPicker', {
     mode: 'multiple',
     dateFormat: 'd',
     locale: 'ru',
   });
 
-  // Generate Table
+  // Генерация таблицы
   document.getElementById('generateTableBtn').addEventListener('click', function() {
     const month = document.getElementById('monthPicker').value;
     const customer = document.getElementById('customerInput').value;
@@ -21,29 +21,29 @@ window.addEventListener('DOMContentLoaded', function() {
     const duration = document.getElementById('durationInput').value;
     const video = document.getElementById('videoTitle').value;
 
-    // Create a new Excel workbook
+    // Создание Excel-книги
     const workbook = new ExcelJS.Workbook();
 
-    // Fetch the template file
+    // Получение файла шаблона
     fetch('template.xlsx')
       .then(function(response) {
         return response.arrayBuffer();
       })
       .then(function(data) {
-        // Load the template into the workbook
+        // Загрузка шаблона в книгу
         return workbook.xlsx.load(data);
       })
       .then(function() {
-        // Modify the workbook as needed
+        // Изменение книги по мере необходимости
         const worksheet = workbook.getWorksheet(1);
 
-        // Set the values
+        // Выбор нужных ячеек
         worksheet.getCell('F4').value = customer;
         worksheet.getCell('F5').value = video;
         worksheet.getCell('F6').value = duration;
         worksheet.getCell('I1').value = month;
 
-        // Set the ad days and ad times values
+        // Установка значений от времени и дней
         adDays.forEach(function(day) {
           const column = String.fromCharCode(65 + parseInt(day)); // Convert day to column letter
           adTimes.forEach(function(time, index) {
@@ -66,17 +66,17 @@ window.addEventListener('DOMContentLoaded', function() {
           });
         });         
 
-        // Generate the formatted Excel file
+        // Генерация оформленного Excel-файла
         return workbook.xlsx.writeBuffer();
       })
       .then(function(buffer) {
         // Create a Blob from the buffer
         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-        // Generate a temporary download link
+        // Генерация временной ссылки на скачивание
         const url = window.URL.createObjectURL(blob);
 
-        // Create a download link element
+        // Создание элемента для ссылки на скачивание
         const link = document.createElement('a');
         link.href = url;
 
@@ -86,14 +86,14 @@ window.addEventListener('DOMContentLoaded', function() {
         
         link.download = filename;
 
-        // Trigger the download
+        // Триггер загрузки
         link.click();
 
-        // Clean up the temporary download link
+        // Очистка временной ссылки на скачивание
         window.URL.revokeObjectURL(url);
       })
       .catch(function(error) {
-        console.error('Error:', error);
+        console.error('Ошибка: ', error);
       });
   });
 });
