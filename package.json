@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "exceljs": "^4.3.0",
-    "flatpickr": "^4.6.13"
-  }
-}
