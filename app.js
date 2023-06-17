@@ -73,9 +73,9 @@ window.addEventListener('DOMContentLoaded', function() {
               row = 16;
             }
             const cell = worksheet.getCell(column + row);
-            cell.value = duration;
+            cell.value = { formula: parseInt(duration), result: parseInt(duration) };
           });
-        });         
+        });
 
         // Генерация оформленного Excel-файла
         return workbook.xlsx.writeBuffer();
